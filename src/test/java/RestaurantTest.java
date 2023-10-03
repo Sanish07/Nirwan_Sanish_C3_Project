@@ -69,5 +69,20 @@ class RestaurantTest {
         assertThrows(itemNotFoundException.class,
                 ()->restaurant.removeFromMenu("French fries"));
     }
+
+    //Below tests are written for testing the order values when items are passed/not passed
+    // These were written before making changes in any class code. (Failing test cases as a part of TDD)
+    @Test
+    public void order_value_should_return_corresponding_total_price_of_selected_items_present_in_restaurant_menu(){
+        int price = restaurant.getOrderValue("Sweet corn soup","Vegetable lasagne");
+        assertThat(price, equalTo(388));
+    }
+
+    @Test
+    public void order_value_should_return_zero_when_we_do_not_select_any_items(){
+        int price = restaurant.getOrderValue(); //Passing no parameters mean we haven't selected any items from menu
+        assertThat(price, equalTo(0));
+    }
+
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 }
