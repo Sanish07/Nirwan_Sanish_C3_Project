@@ -10,6 +10,8 @@ public class Restaurant {
     public LocalTime closingTime;
     private List<Item> menu = new ArrayList<Item>();
 
+    private List<Item> selectedItems = new ArrayList<>();
+
     public Restaurant(String name, String location, LocalTime openingTime, LocalTime closingTime) {
         this.name = name;
         this.location = location;
@@ -60,6 +62,20 @@ public class Restaurant {
 
     public String getName() {
         return name;
+    }
+
+    public int getOrderValue(String ...items) {
+        int orderValue = 0;
+        for(String item : items){
+            for(Item menuItem : menu){
+                if(item.equals(menuItem.getName())) selectedItems.add(menuItem); //Condition to add the item object from menu list to selected items list.
+            }
+        }
+
+        for(Item selectedItem : selectedItems){
+            orderValue += selectedItem.getPrice(); //Once all items are added in selectedItems list, we will calculate order value.
+        }
+        return orderValue;
     }
 
 }
